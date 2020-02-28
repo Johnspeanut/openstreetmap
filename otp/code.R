@@ -1,4 +1,5 @@
 library(opentripplanner)
+options(digits=8)
 # Path to a folder containing the OTP.jar file, change to where you saved the file.
 path_data <- file.path("C:\\Project_R_Tool\\OpenStripPlanner","otp")
 path_otp <- file.path(path_data,"otp.jar")
@@ -18,9 +19,11 @@ otpcon <- otp_connect()
 toPlace   = block_centroids[rep(seq(1, nrow(block_centroids)), times = nrow(block_centroids)),]
 fromPlace = block_centroids[rep(seq(1, nrow(block_centroids)), each  = nrow(block_centroids)),]
 
+head(toPlace)
+head(fromPlace)
 
 routes <- otp_plan(otpcon = otpcon,
                    fromPlace = fromPlace,
-                   toPlace = toPlace,
+                   toPlace = toPlace,mode='WALK',
                    get_geometry = FALSE,
                    ncores=3)
